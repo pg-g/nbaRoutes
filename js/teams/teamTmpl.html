@@ -12,22 +12,23 @@
   <form ng-show="showNewGameForm" class="form">
     <span class="large">Opponent:</span> <br /><select ng-model="teamss" ng-options="team for team in teams" class="form-control" required name="team"></select> <br /><br />
     <span class="large">Score:</span> <br /> 
-      {{homeTeam}}: <input class="inputs" type="text" ng-model="homeTeamScore" placeholder="Home Score"> 
+      {{homeTeam}}: <input class="inputs" type="text" ng-model="homeTeamScore" placeholder="Home Score"> <br />
       {{teamss}}: <input type="text" class="inputs" ng-model="opponentScore" placeholder="Opponent Score"> 
       <br /><br />
+      <!-- <ng-model='timestamp'> -->
     <button ng-click="submitGame()"> Submit Game </button>
   </form>
 
   <div class="team-data">
     <div class="game" ng-repeat="game in teamData" ng-class="{'even' : $index % 2 === 0}">
-      Date: {{game.updatedAt | date: 'shortDate'}} <br />
+      Date: {{game.updatedAt | date: 'mediumDate'}} <br />
       <!-- 
         The below question marks should render like this
         Utah Jazz (Or name of Team) - Score of the particular Game
         Opponent Name - Opponent Score for that Game
       -->
 
-      {{homeTeam}} - {{game.homeTeamScore}}<br />
+      {{game.homeTeam}} - {{game.homeTeamScore}}<br />
       {{game.opponent}} - {{game.opponentScore}} </br />
     </div>
   </div>

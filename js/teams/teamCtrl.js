@@ -25,25 +25,10 @@ app.controller('teamCtrl', function($scope, $routeParams, teamService, teamData)
 		$scope.logoPath = '/images/heat-logo.png';
 	}
 
-	$scope.addNewGame = function(gameObj) {
-		var url = "https://api.parse.com/1/classes/" + gameObj.homeTeam;
-
-		if(parseInt(gameObj.homeTeamScore) > parseInt(gameObj.opponentScore)){
-			gameObj.won = true;
-		} else {
-			gameObj.won = false;
-		}
-
-		return $http({
-			method: 'POST',
-			url: url
-		})
-	};//end addNewGame
-
 	$scope.submitGame = function(){
 		$scope.homeTeam.split(' ').join('').toLowerCase();
-		addNewGame($scope.newGame).then(function(){
-			getTeamData($scope.newGame.homeTeam).then(function(data){
+		teamService.addNewGame($scope.newGame).then(function(){
+			teamService.getTeamData($scope.newGame.homeTeam).then(function(data){
 				$scope.teamData = data;
 				$scope.newGame = {};
 				$scope.showNewGameForm = false;
